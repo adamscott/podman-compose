@@ -449,10 +449,10 @@ def mount_desc_to_volume_args(compose, mount_desc, srv_name, cnt_name):
     proj_name = compose.project_name
     shared_vols = compose.shared_vols
     print("mount_desc_to_volume_args")
-    print("shared_vols: " + shared_vols)
+    print("shared_vols: " + json.dumps(shared_vols))
     mount_type = mount_desc["type"]
     source = mount_desc.get("source", None)
-    print("source: " + source)
+    print("source: " + json.dumps(source))
     target = mount_desc["target"]
     opts = []
     if mount_type != 'bind' and mount_type != 'volume':
