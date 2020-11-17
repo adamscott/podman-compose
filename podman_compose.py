@@ -103,6 +103,7 @@ def parse_short_mount(mount_str, basedir):
         else:
             # TODO: ignore
             raise ValueError("unknown mount option "+opt)
+    print("parse_short_mount result: " + json.dumps(dict(type=mount_type, source=mount_src, target=mount_dst, **mount_opt_dict)))
     return dict(type=mount_type, source=mount_src, target=mount_dst, **mount_opt_dict)
 
 # NOTE: if a named volume is used but not defined it
@@ -384,6 +385,16 @@ def assert_volume(compose, mount_dict):
     print("vol_name_orig: " + vol_name_orig)
     vol_name = mount_dict["source"]
     print("vol_name: " + vol_name)
+
+    if vol_name_orig in shared_vols:
+        shared_vol = shared_vols.get(vol_name_orig)
+        if "name" in shared_vol
+            shared_vol_name = shared_vol.get("name")
+        else
+            shared_vol_name = vol_name_orig
+        if "external" in shared_vol
+            vol_name = shared_vol_name
+
     print("podman volume inspect {vol_name} || podman volume create {vol_name}".format(vol_name=vol_name))
     # TODO: might move to using "volume list"
     # podman volume list --format '{{.Name}}\t{{.MountPoint}}' -f 'label=io.podman.compose.project=HERE'
