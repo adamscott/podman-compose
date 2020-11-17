@@ -378,9 +378,12 @@ def assert_volume(compose, mount_dict):
     if mount_dict["type"] != "volume": return
     proj_name = compose.project_name
     shared_vols = compose.shared_vols
-
+    print("assert_volume")
+    print("shared_vols: " + json.dumps(shared_vols, indent=2)
     vol_name_orig = mount_dict.get("_source", None)
+    print("vol_name_orig: " + vol_name_orig)
     vol_name = mount_dict["source"]
+    print("vol_name: " + vol_name)
     print("podman volume inspect {vol_name} || podman volume create {vol_name}".format(vol_name=vol_name))
     # TODO: might move to using "volume list"
     # podman volume list --format '{{.Name}}\t{{.MountPoint}}' -f 'label=io.podman.compose.project=HERE'
@@ -449,7 +452,7 @@ def mount_desc_to_volume_args(compose, mount_desc, srv_name, cnt_name):
     proj_name = compose.project_name
     shared_vols = compose.shared_vols
     print("mount_desc_to_volume_args")
-    print("shared_vols: " + "".join([str(s) for s in shared_vols]))
+    print("shared_vols: " + json.dumps(shared_vols, indent=2))
     mount_type = mount_desc["type"]
     source = mount_desc.get("source", None)
     print("source: " + source)
@@ -918,7 +921,7 @@ class PodmanCompose:
         # volumes: [...]
         shared_vols = compose.get('volumes', {})
         # shared_vols = list(shared_vols.keys())
-        shared_vols = set(shared_vols.keys())
+        # shared_vols = set(shared_vols.keys())
         self.shared_vols = shared_vols
         podman_compose_labels = [
             "io.podman.compose.config-hash=123",
