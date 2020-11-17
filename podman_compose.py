@@ -379,7 +379,7 @@ def assert_volume(compose, mount_dict):
     proj_name = compose.project_name
     shared_vols = compose.shared_vols
     print("assert_volume")
-    print("shared_vols: " + json.dumps(shared_vols, indent=2)
+    print("shared_vols: " + json.dumps(shared_vols, indent=2))
     vol_name_orig = mount_dict.get("_source", None)
     print("vol_name_orig: " + vol_name_orig)
     vol_name = mount_dict["source"]
